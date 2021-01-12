@@ -1,5 +1,8 @@
 package com.unfbx.算法;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Description
  *
@@ -36,7 +39,48 @@ package com.unfbx.算法;
  */
 public class No1684 {
 
-    public int countConsistentStrings(String allowed, String[] words) {
-        return 0;
+
+    public static void main(String[] args) {
+        //allowed = "ab", words = ["ad","bd","aaab","baa","badab"]
+        String[] array = {"cc","acd","b","ba","bac","bad","ac","d"};
+        System.out.println(countConsistentStrings("cad",array));
+    }
+
+    public static int countConsistentStrings(String allowed, String[] words) {
+        //map用数组代替效率会提升
+        Map<Character,Integer> map = new HashMap<>();
+        for(int i = 0;i<allowed.length();i++){
+            map.put(allowed.charAt(i),1);
+        }
+        int res = 0;
+        for (String temp : words){
+            boolean flag = true;
+            for (int i = 0 ;i<temp.length();i++){
+                if(map.get(temp.charAt(i)) == null){
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                res += 1;
+            }
+        }
+
+
+        return res;
+    }
+
+    public static int countConsistentStrings1(String allowed, String[] words) {
+        char[] chars = allowed.toCharArray();
+        int res = 0;
+        for (String word : words) {
+            for (char aChar : chars) {
+                word = word.replaceAll(String.valueOf(aChar),"");
+            }
+            if ("".equals(word)){
+                res++;
+            }
+        }
+        return res;
     }
 }
