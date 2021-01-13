@@ -41,13 +41,19 @@ package com.unfbx.算法;
 public class No807 {
     public static void main(String[] args) {
         int[][] grid = {
-                {3, 0, 8, 4},
+                {4, 0, 8, 4},
                 {2, 4, 5, 7},
                 {9, 2, 6, 3},
                 {0, 3, 1, 0}
         };
-
-
+        // * 从数组竖直方向（即顶部，底部）看“天际线”是：[9, 4, 8, 7]
+        // * 从水平水平方向（即左侧，右侧）看“天际线”是：[8, 7, 9, 3]
+//        int[][] gridNew = {
+//                {8, 4, 8, 7},
+//                {7, 4, 7, 7},
+//                {9, 4, 8, 7},
+//                {3, 3, 3, 3}
+//        };
         System.out.println(maxIncreaseKeepingSkyline(grid));
     }
 
@@ -55,17 +61,31 @@ public class No807 {
         int[] line = new int[grid[0].length];//竖直方向
         int[] row = new int[grid.length];//水平方向
         int max = 0;
+        //拿到天际线
         for (int i = 0; i < grid.length; i++) {
             max = 0;
             for (int j = 0; j < grid[0].length; j++) {
-                max = grid[i][i];
-                if (grid[i][i] > max) {
-                    max = grid[i][i];
+                if (grid[i][j] > max) {
+                    max = grid[i][j];
                 }
-                line[i] = max;
-            }
+                if (row[j] < grid[i][j]) {
+                    row[j] = grid[i][j];
+                }
 
+            }
+            line[i] = max;
         }
-        return 0;
+        //计算增量
+        int res = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if(line[i] < row[j]){
+                    res += (line[i] - grid[i][j]);
+                    continue;
+                }
+                res += (row[j] - grid[i][j]);
+            }
+        }
+        return res;
     }
 }
