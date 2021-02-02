@@ -51,12 +51,28 @@ package com.unfbx.算法;
  * @Date 2021-01-13
  */
 public class No27 {
-    public int removeElement(int[] nums, int val) {
 
+    public static void main(String[] args) {
+        int[] nums = {3,2,2,3};
+        System.out.println(removeElement(nums,3));
+    }
 
-        for (int i = 0; i<nums.length ;i++){
-
+    public static int removeElement(int[] nums, int val) {
+        if(nums == null || nums.length == 0){
+            return 0;
         }
-        return 0;
+        int j = 0;
+        int x = 0;
+        for (int i = 0; i<nums.length ;i++){
+            if(nums[i] == val){
+                //等于不用管
+                continue;
+            }
+            j = i;
+
+            nums[j] = nums[j+1];
+            x++;
+        }
+        return nums.length - x;
     }
 }
