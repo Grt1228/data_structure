@@ -14,21 +14,36 @@ public class No100 {
         root1.left = root1L1;
         root1.right = root1R1;
         TreeNode root2 = new TreeNode(1);
-        TreeNode root2L1 = new TreeNode(2);
-        TreeNode root2R1 = new TreeNode(1);
+        TreeNode root2L1 = new TreeNode(1);
+        TreeNode root2R1 = new TreeNode(2);
         root2.left = root2L1;
         root2.right = root2R1;
-        System.out.println(isSameTree(root1,root2));
+        System.out.println(isSameTree1(root1, root2));
+    }
+
+
+    public static boolean isSameTree1(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+
+        if (p == null || q == null) {
+            return false;
+        }
+        if (p.val != q.val) {
+            return false;
+        }
+        return isSameTree1(p.left, q.left) && isSameTree1(p.right, q.right);
     }
 
     public static boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return true;
         }
-        if(p == null || q == null){
+        if (p == null || q == null) {
             return false;
         }
-        if(p.val != q.val){
+        if (p.val != q.val) {
             return false;
         }
 
