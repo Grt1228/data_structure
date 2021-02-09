@@ -26,6 +26,6 @@ package com.unfbx.算法;
 public class No665 {
 
     public boolean checkPossibility(int[] nums) {
-
+        return false;
     }
 }
