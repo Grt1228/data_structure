@@ -20,6 +20,7 @@ public class No876 {
         l13.next = l14;
         l14.next = l15;
         System.out.println(middleNode(l1));
+        System.out.println(middleNode2(l1));
     }
 
     public static ListNode middleNode(ListNode head) {
@@ -35,7 +36,7 @@ public class No876 {
 
         int j = 0;
         if (i % 2 == 0) {
-            j = i / 2 +1;
+            j = i / 2 + 1;
         } else {
             j = (i / 2) + 1;
         }
@@ -43,12 +44,30 @@ public class No876 {
         while (temp != null) {
 
             j -= 1;
-            if(j == 0){
+            if (j == 0) {
                 break;
             }
             temp = temp.next;
 
         }
         return temp;
+    }
+
+    /**
+     * 快慢指针
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode middleNode2(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        return slow;
     }
 }
