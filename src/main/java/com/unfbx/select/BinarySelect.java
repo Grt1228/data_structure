@@ -11,10 +11,12 @@ import java.util.List;
 public class BinarySelect {
 
     public static void main(String[] args) {
-        int[] array = {1,8,10,89,1000,1000,1234};
+        //int[] array = {-1,0,3,5,9,12};
+        int[] array = {-1};
 
         //System.out.println(binarySelect(array,0,array.length-1,1234));
-        System.out.println(binarySelect1(array,0,array.length-1,1000).toString());
+        //System.out.println(binarySelect1(array,0,array.length-1,1000).toString());
+        System.out.println(search(array,-1));
     }
 
     /**
@@ -87,6 +89,28 @@ public class BinarySelect {
             return list;
         }
 
+    }
+
+
+    public static int search(int[] nums, int target) {
+
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if(target == nums[mid]){
+                return mid;
+            }
+            if (target > nums[mid]) {
+                left = mid+1;
+            }
+            if (target < nums[mid]) {
+                right = mid-1;
+            }
+        }
+
+
+        return -1;
     }
 
 

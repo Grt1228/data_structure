@@ -1,16 +1,14 @@
 package com.unfbx.算法;
 
 /**
- * @Description
- * 反转一个单链表。
- *
+ * @Description 反转一个单链表。
+ * <p>
  * 示例:
- *
+ * <p>
  * 输入: 1->2->3->4->5->NULL
  * 输出: 5->4->3->2->1->NULL
  * 进阶:
  * 你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
- *
  * @Author Grt
  * @Date 2021-02-09
  */
@@ -32,24 +30,15 @@ public class No206 {
 
 
     public static ListNode reverseList(ListNode head) {
-        ListNode current = head;
+        ListNode current = null;//当前指针节点
+        ListNode prev = head; //前指针节点
 
-        while (head.next != null){
-            ListNode next = head.next;
-            next.next = current;
-            head  = head.next;
+        while (prev != null) {
+            ListNode nextTemp = prev.next;
+            prev.next = current;
+            current = prev;
+            prev = nextTemp;
         }
-        return head;
-
-//        ListNode prev = null; //前指针节点
-//        ListNode curr = head; //当前指针节点
-//        //每次循环，都将当前节点指向它前面的节点，然后当前节点和前节点后移
-//        while (curr != null) {
-//            ListNode nextTemp = curr.next; //临时节点，暂存当前节点的下一节点，用于后移
-//            curr.next = prev; //将当前节点指向它前面的节点
-//            prev = curr; //前指针后移
-//            curr = nextTemp; //当前指针后移
-//        }
-//        return prev;
+        return current;
     }
 }
