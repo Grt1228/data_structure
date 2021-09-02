@@ -15,7 +15,38 @@ public class offer22 {
         heap1.next = heap2;
         heap2.next = heap3;
         heap3.next = heap4;
-        getKthFromEnd(heap1,2);
+        getKthFromEnd1(heap1,2);
+    }
+
+    public static ListNode getKthFromEnd2(ListNode head, int k){
+        //快慢指针
+        ListNode fast = head;
+        ListNode slow = head;
+        while (k > 0 ){
+            fast = fast.next;
+            k--;
+        }
+        while (fast != null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    public static ListNode getKthFromEnd1(ListNode head, int k){
+        //先求出总长度
+        ListNode temp = head;
+        int sum = 0;
+        while(head != null){
+            head = head.next;
+            sum+=1;
+        }
+        //求出正数第几
+        k = sum - k ;
+        for(int i = 0 ;i <k ;i++){
+            temp = temp.next;
+        }
+        return temp;
     }
 
     public static ListNode getKthFromEnd(ListNode head, int k) {
